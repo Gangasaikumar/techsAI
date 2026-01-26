@@ -176,8 +176,26 @@ const HomePage = () => {
         <h1 className="home-title">Coming Soon</h1>
 
         <p className="home-subtitle">
-          We are crafting <strong>Tech'sAI</strong>. The full product vision is
-          pending implementation.
+          We are crafting{" "}
+          <span className="scribble-highlight">
+            Tech'sAI
+            <svg
+              className="scribble-underline"
+              viewBox="0 0 200 15"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M5 8 C 40 10, 140 3, 195 6"
+                fill="none"
+                stroke="#FFC107"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+          . The full product vision is pending implementation.
         </p>
 
         <div className="countdown-wrapper">

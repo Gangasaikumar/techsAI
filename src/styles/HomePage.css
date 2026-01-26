@@ -260,10 +260,46 @@
         font-size: 0.75rem;
     }
 
+
     .time-separator {
         font-size: 2.2rem;
         padding-top: 2.2rem;
         /* Pushes dash down to center of cards */
         margin: 0 0.1rem;
+    }
+}
+
+/* Scribble Highlight */
+.scribble-highlight {
+    position: relative;
+    display: inline-block;
+    color: #FFC107;
+    font-weight: 700;
+    /* Ensure text is on top of the mark */
+    z-index: 1;
+}
+
+.scribble-underline {
+    position: absolute;
+    left: -5%;
+    bottom: -9px;
+    width: 110%;
+    height: 15px;
+    pointer-events: none;
+    user-select: none;
+    overflow: visible;
+    z-index: -1;
+    opacity: 0.9;
+}
+
+.scribble-underline path {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: scribble 0.8s ease-out forwards 0.3s;
+}
+
+@keyframes scribble {
+    to {
+        stroke-dashoffset: 0;
     }
 }
