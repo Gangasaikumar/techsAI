@@ -1,0 +1,35 @@
+/* Standard Section Header */
+.section-header {
+    margin-bottom: 3rem;
+    text-align: left;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5px;
+    color: #fff;
+    font-family: 'Fira Code', monospace;
+    line-height: 1.2;
+}
+
+.section-subtitle {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: block;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+}

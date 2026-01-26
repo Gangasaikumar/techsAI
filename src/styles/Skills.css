@@ -1,0 +1,192 @@
+/* Skills Section - VS Code Theme */
+
+.skills-header {
+    margin-bottom: 3rem;
+    text-align: left !important;
+    /* Force Left Align */
+    width: 100%;
+}
+
+.skills-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5px;
+    color: #fff;
+    font-family: 'Fira Code', monospace;
+    /* Monospace Title */
+}
+
+.skills-subtitle {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: block;
+    /* Ensure it takes full width if needed for alignment context */
+}
+
+/* 
+   tabs-container: VS Code Editor Header Style
+   (Applied globally, wrapping enabled for mobile)
+*/
+.scrollable-tabs-container {
+    display: flex;
+    justify-content: flex-start !important;
+    /* Force Left Align Tabs */
+    gap: 1px;
+    margin-bottom: 3rem;
+    background: #252526;
+    /* VS Code Tab Bg */
+    padding: 6px;
+    border-radius: 6px;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: 0 !important;
+    /* Force Left Margin */
+    margin-right: auto;
+    border: 1px solid #3e3e42;
+    flex-wrap: wrap;
+    /* Key for Mobile: Wrap tabs instead of scrolling pills */
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: #969696;
+    padding: 8px 24px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: 'Fira Code', monospace;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-grow: 1;
+    /* Tabs fill available space on mobile lines */
+}
+
+.tab-btn:hover {
+    color: #fff;
+    background: #2d2d2d;
+}
+
+.tab-btn.active {
+    color: #fff;
+    background: #1e1e1e;
+    border-top: 2px solid var(--accent);
+    /* VS Code Active Indicator */
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* 
+   CODE SNIPPET CARD 
+*/
+.skill-item {
+    background: #1e1e1e;
+    /* VS Code Editor Bg */
+    border: 1px solid #3e3e42;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Window Header (Filename) */
+.ide-header {
+    background: #252526;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #333;
+}
+
+.file-icon {
+    color: var(--accent);
+}
+
+.file-name {
+    color: #cccccc;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+}
+
+/* Code Content Area */
+.ide-body {
+    padding: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #d4d4d4;
+    /* Default Text */
+}
+
+/* Syntax Highlighting Classes */
+.token-keyword {
+    color: #c586c0;
+}
+
+.token-def {
+    color: #dcdcaa;
+}
+
+.token-operator {
+    color: #d4d4d4;
+}
+
+.token-punctuation {
+    color: #ffd700;
+}
+
+.token-property {
+    color: #9cdcfe;
+}
+
+.token-string {
+    color: #ce9178;
+}
+
+.token-number {
+    color: #b5cea8;
+}
+
+.token-comment {
+    color: #6a9955;
+    font-style: italic;
+}
+
+
+/* 
+   MOBILE STYLES 
+*/
+@media (max-width: 768px) {
+    .skills-title {
+        font-size: 2rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 
+       No specific overrides for tabs needed here.
+       The base style with flex-wrap: wrap will handle it.
+       We just ensure the container doesn't overflow.
+    */
+    .scrollable-tabs-container {
+        width: 100%;
+        border-radius: 8px;
+    }
+}

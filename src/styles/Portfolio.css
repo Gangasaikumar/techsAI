@@ -1,0 +1,198 @@
+/* Glassmorphic Portfolio Theme */
+
+.portfolio-section {
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    /* Wider for premium feel */
+    margin: 0 auto;
+    position: relative;
+    /* Optional: Global background spot for glass effect? */
+}
+
+/* Header Styling */
+.portfolio-header {
+    margin-bottom: 4rem;
+    text-align: left;
+    /* Aligned left as requested */
+}
+
+.portfolio-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+    background-clip: text;
+    /* Standard property for compatibility */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+}
+
+.portfolio-description {
+    color: var(--accent);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+/* Grid Layout */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 3rem;
+    padding: 1rem;
+    /* Space for hover glows */
+}
+
+/* 
+   GLASS CARD 
+*/
+/* 
+   GLASS CARD 
+*/
+.project-card {
+    position: relative;
+    border-radius: 36px;
+    /* Deep rounding for "Squircle-like" feel */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hover State: "Lift & Glow" */
+.project-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.05);
+    /* Slightly lighter */
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(255, 193, 7, 0.1);
+    /* Subtle yellow glow */
+}
+
+/* Image Area */
+.project-image-wrapper {
+    position: relative;
+    height: 260px;
+    /* Tall and immersive */
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+    filter: brightness(0.9);
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+    filter: brightness(1);
+}
+
+/* Overlay / Button */
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(4px);
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.view-project-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border-radius: 100px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.view-project-btn:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+}
+
+.project-card:hover .view-project-btn {
+    transform: translateY(0);
+}
+
+/* Content Area */
+.project-info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project-category {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+
+.project-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    /* Soft text */
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .portfolio-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .portfolio-title {
+        font-size: 2.5rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .project-image-wrapper {
+        height: 200px;
+    }
+}

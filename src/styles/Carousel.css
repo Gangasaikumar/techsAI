@@ -1,0 +1,89 @@
+/* Carousel Component Styles */
+
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+}
+
+.carousel-title-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.carousel-subtitle {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.carousel-nav {
+    display: flex;
+    align-items: center;
+}
+
+.carousel-line {
+    width: 2rem;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.carousel-line-extend {
+    width: 4rem;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin-right: -4rem;
+}
+
+.carousel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    overflow: hidden;
+}
+
+/* Responsive adjustment for Mobile */
+@media (max-width: 640px) {
+    .carousel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .carousel-nav {
+        align-self: flex-end;
+        /* Align to right corner */
+        margin-top: -3rem;
+        /* Pull up to be beside/near subtitle if space permits, or just standard margin */
+    }
+
+    .nav-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .nav-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .carousel-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        /* Fix grid size for mobile */
+    }
+
+    .carousel-line-extend {
+        display: none;
+        /* Hide the extending line on mobile as it might cause scroll */
+    }
+}

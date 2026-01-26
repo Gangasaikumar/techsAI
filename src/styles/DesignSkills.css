@@ -1,0 +1,365 @@
+/* Design Skills - "Component Selection" Theme */
+
+.design-skills-header {
+    margin-bottom: 3rem;
+}
+
+.design-skills-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.design-skills-subtitle {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+/* Grid Layout */
+.design-skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    width: 100%;
+}
+
+.design-list-item {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main Dashed Container */
+.dashed-selection-border {
+    position: relative;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    background: transparent;
+    height: 100%;
+}
+
+.dashed-selection-border:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Outer Box Handles */
+.handle-square {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    z-index: 2;
+    border: 1px solid #000;
+    display: block;
+}
+
+/* Extended Corners (-8px) */
+.top-left {
+    top: -8px;
+    left: -8px;
+}
+
+.top-right {
+    top: -8px;
+    right: -8px;
+}
+
+.bottom-left {
+    bottom: -8px;
+    left: -8px;
+}
+
+.bottom-right {
+    bottom: -8px;
+    right: -8px;
+}
+
+
+/* 
+   ------------------------------------
+   1. Category "Selected Text" Styling 
+   ------------------------------------
+*/
+.category-selection-wrapper {
+    position: relative;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    padding: 0px 8px;
+    display: inline-block;
+}
+
+.design-category-header {
+    font-size: 0.75rem;
+    color: #ccc;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: block;
+}
+
+/* Diamond Handles */
+.category-handle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    transform: rotate(45deg);
+}
+
+.diamond-top-left {
+    top: -3px;
+    left: -3px;
+}
+
+.diamond-top-mid {
+    top: -3px;
+    left: 50%;
+}
+
+.diamond-top-right {
+    top: -3px;
+    right: -3px;
+}
+
+.diamond-mid-left {
+    top: 50%;
+    left: -3px;
+}
+
+.diamond-mid-right {
+    top: 50%;
+    right: -3px;
+}
+
+.diamond-bottom-left {
+    bottom: -3px;
+    left: -3px;
+}
+
+.diamond-bottom-mid {
+    bottom: -3px;
+    left: 50%;
+}
+
+.diamond-bottom-right {
+    bottom: -3px;
+    right: -3px;
+}
+
+
+/* 
+   ------------------------------------
+   2. Tool Header & Highlight 
+   ------------------------------------
+*/
+.design-tool-block {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Prevent Icon from shrinking */
+.design-tool-block svg {
+    flex-shrink: 0;
+}
+
+.design-tool-text {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    /* No background here */
+}
+
+/* The ACTUAL Highlight */
+.tool-text-highlight {
+    background: #fada4a;
+    color: #3d3d3d;
+    padding: 0.4rem;
+    border-radius: 4px;
+}
+
+/* Static Cursor */
+.static-text-cursor {
+    color: var(--accent);
+    margin-left: -10px;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+/* 3. Description */
+.design-skill-description {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 95%;
+}
+
+/* 
+   ------------------------------------
+   4. Proficiency Badge - TOP RIGHT 
+   ------------------------------------
+*/
+.design-badge-wrapper {
+    position: absolute;
+    /* Moved from flow to absolute */
+    /* top: 2.5rem; */
+    /* Align with container padding */
+    right: 2.5rem;
+    /* Align with container padding */
+    margin: 0;
+}
+
+.badge-selection-wrapper {
+    position: relative;
+    display: inline-block;
+    border: 1px dashed var(--accent);
+    padding: 2px 12px;
+}
+
+.design-proficiency-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    /* line-height: 1; */
+    letter-spacing: 1px;
+}
+
+/* Badge Corner Handles */
+.badge-handle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    z-index: 2;
+}
+
+.badge-top-left {
+    top: -3px;
+    left: -3px;
+}
+
+.badge-top-right {
+    top: -3px;
+    right: -3px;
+}
+
+.badge-bottom-left {
+    bottom: -3px;
+    left: -3px;
+}
+
+.badge-bottom-right {
+    bottom: -3px;
+    right: -3px;
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .design-skills-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .dashed-selection-border {
+        border: 2px dashed rgba(255, 255, 255, 0.4);
+        padding: 1.5rem;
+        gap: 1.2rem;
+        background: transparent;
+        border-radius: 0;
+    }
+
+    .handle-square {
+        display: block !important;
+        width: 8px;
+        height: 8px;
+    }
+
+    .top-left {
+        top: -6px;
+        left: -6px;
+    }
+
+    .top-right {
+        top: -6px;
+        right: -6px;
+    }
+
+    .bottom-left {
+        bottom: -6px;
+        left: -6px;
+    }
+
+    .bottom-right {
+        bottom: -6px;
+        right: -6px;
+    }
+
+    /* Text resizing */
+    .design-tool-text {
+        font-size: 1.6rem;
+    }
+
+    .tool-text-highlight {
+        padding: 0.1rem 0.4rem;
+        background: var(--accent);
+    }
+
+    /* Icon resizing */
+    .design-tool-block svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .design-tool-block {
+        gap: 0.8rem;
+    }
+
+    .static-text-cursor {
+        display: inline-block !important;
+        width: 28px !important;
+        height: 28px !important;
+        margin-left: -2px;
+        flex-shrink: 0;
+    }
+
+    .design-skill-description {
+        font-size: 0.95rem;
+    }
+
+    .category-selection-wrapper {
+        border: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .category-handle {
+        width: 4px;
+        height: 4px;
+    }
+
+    /* Badge Positioning on Mobile */
+    .design-badge-wrapper {
+        /* top: 1.5rem; */
+        right: 1.5rem;
+    }
+}

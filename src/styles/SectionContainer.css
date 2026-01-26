@@ -1,0 +1,27 @@
+/* Section Container Styles */
+
+.section-container {
+    min-height: 80vh;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    padding: 6rem 4rem;
+}
+
+.section-content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-inner-content {
+    line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-container {
+        padding: 4rem 1rem;
+        /* Reduced padding on mobile to prevent overflow with nested margins */
+        overflow-x: hidden;
+        /* Ensure sections don't overflow */
+    }
+}

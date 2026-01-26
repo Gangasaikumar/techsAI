@@ -1,0 +1,162 @@
+/* Header Container */
+.main-header {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 1400px;
+    height: 70px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: rgba(100, 100, 100, 0.4);
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Header Left (Logo + Name) */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+}
+
+.brand-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* Header Right Container */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    height: 100%;
+}
+
+/* Desktop Menu */
+.desktop-menu {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    height: 100%;
+}
+
+.nav-link {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    outline: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.nav-link.active {
+    color: var(--accent);
+}
+
+.active-tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -2px 8px rgba(255, 193, 7, 0.4);
+}
+
+/* Download Button */
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: black !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+}
+
+.download-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .desktop-menu {
+        display: none !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .brand-name {
+        font-size: 1.4rem;
+    }
+
+    .header-left {
+        display: none !important;
+    }
+
+    .main-header {
+        justify-content: flex-end !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        border: none !important;
+        width: auto !important;
+        left: auto !important;
+        right: 1rem !important;
+        transform: none !important;
+        pointer-events: none !important;
+        top: 1rem;
+    }
+
+    /* Force High Visibility Download Button on Mobile */
+    .download-btn {
+        pointer-events: auto !important;
+        background: var(--accent) !important;
+        /* Yellow */
+        border-color: var(--accent) !important;
+        color: #000 !important;
+        /* Black Text */
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        padding: 0.6rem 1.4rem;
+    }
+}

@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap');
+
+:root {
+  /* Color Palette - Design Matched */
+  --bg-primary: #1F2022;
+  /* Dark Grey/Blueish tone from design */
+  --bg-secondary: #252628;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --accent: #faca3c;
+  /* Golden Yellow */
+  --accent-dim: rgba(255, 193, 7, 0.2);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --header-height: 80px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+/* Utility */
+.glass-nav {
+  background: rgba(31, 32, 34, 0.85);
+  /* Matches bg-primary with opacity */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.container {
+  max-width: 1400px;
+  /* Wider for the hero layout */
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Typography */
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Global transition */
+a,
+button {
+  transition: all 0.3s ease;
+}
+
+/* Carousel Navigation Buttons */
+.nav-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.nav-btn:active {
+  background-color: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}

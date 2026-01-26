@@ -1,0 +1,99 @@
+/* About Section Container (if needed, but usually handled by SectionContainer padding) */
+
+.about-header {
+    margin-bottom: 3rem;
+}
+
+.about-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.about-subtitle {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.about-bio {
+    max-width: 800px;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+}
+
+/* Info Grid */
+.about-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    max-width: 800px;
+    font-size: 0.95rem;
+}
+
+.about-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-row {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.info-label {
+    color: var(--accent);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.info-value {
+    color: #fff;
+}
+
+.info-value-dim {
+    color: #ccc;
+    word-break: break-all;
+}
+
+.info-address {
+    line-height: 1.6;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Responsive & Border Logic */
+
+/* Desktop Specifics */
+@media (min-width: 769px) {
+    .about-col:last-child .info-row {
+        border-right: none;
+        border-bottom: none;
+        height: 100%;
+    }
+
+    .about-col:first-child .info-row:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Mobile Specifics */
+@media (max-width: 768px) {
+    .about-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-row {
+        border-right: none;
+        padding: 1rem;
+    }
+
+    .about-col:first-child .info-row:last-child {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+}

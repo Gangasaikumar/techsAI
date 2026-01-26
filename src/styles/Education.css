@@ -1,0 +1,206 @@
+/* Education Section - ID Card / Certificate Theme */
+
+.education-header {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.education-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    line-height: 1;
+}
+
+.education-subtitle {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    padding: 1rem;
+    perspective: 1000px;
+}
+
+/* 
+   THE CARD 
+*/
+.edu-card {
+    position: relative;
+    background: #111;
+    /* Deep Dark */
+    border-radius: 16px;
+    padding: 2px;
+    /* For border gradient */
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    /* Subtle border initially */
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    height: 100%;
+}
+
+.edu-card:hover {
+    transform: translateY(-10px) rotateX(2deg);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+}
+
+/* Inner Content Container */
+.edu-card-inner {
+    background: #1a1a1a;
+    border-radius: 14px;
+    padding: 2rem;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    /* Background pattern like security paper */
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* 
+   HOLOGRAPHIC FOIL EFFECT 
+   We overlay a gradient that is normally invisible or subtle, 
+   and on hover it moves and shines.
+*/
+.holo-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.1) 75%,
+            transparent 100%);
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: overlay;
+    background-size: 200% 200%;
+}
+
+.edu-card:hover .holo-overlay {
+    opacity: 1;
+    animation: holoShine 2s infinite linear;
+    background:
+        linear-gradient(115deg,
+            transparent 20%,
+            rgba(0, 255, 255, 0.4) 30%,
+            rgba(255, 0, 255, 0.4) 50%,
+            rgba(255, 255, 0, 0.4) 70%,
+            transparent 80%);
+    background-size: 200% 200%;
+    mix-blend-mode: color-dodge;
+}
+
+@keyframes holoShine {
+    0% {
+        background-position: 100% 0%;
+    }
+
+    100% {
+        background-position: -100% 100%;
+    }
+}
+
+/* Card Elements */
+.edu-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.edu-icon-box {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 193, 7, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.edu-id {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: #555;
+    background: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #333;
+}
+
+.edu-school {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-family: 'Playfair Display', serif;
+    /* A touch of classy serif for the Institution name */
+}
+
+.edu-degree {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.edu-desc {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.edu-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #666;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.edu-loc {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.verified-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #4caf50;
+    /* Green for verified */
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .education-title {
+        font-size: 2rem;
+    }
+}

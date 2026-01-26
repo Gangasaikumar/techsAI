@@ -1,0 +1,158 @@
+/* Hero Section */
+#home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+/* Name Badge */
+.name-badge {
+    background: var(--bg-primary);
+    padding: 1rem 1rem;
+    border-radius: 50px 0 0 50px;
+    width: fit-content;
+    margin-left: -7.5rem;
+    /* Desktop Overlap */
+    position: relative;
+    z-index: 50;
+    margin-bottom: 0.5rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+    color: white;
+}
+
+/* Role Tag */
+.hero-role {
+    color: var(--accent);
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    text-transform: uppercase;
+    min-height: 24px;
+    /* Prevent layout shift */
+}
+
+.cursor {
+    animation: blink 1s step-end infinite;
+    margin-left: 4px;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Bio */
+.hero-bio {
+    max-width: 500px;
+    line-height: 1.7;
+    color: #aaa;
+    margin-bottom: 3rem;
+    font-size: 0.95rem;
+}
+
+/* Buttons Container */
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Contact Button */
+.hero-btn {
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 0.5rem;
+}
+
+.hero-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: black;
+    transform: translateY(-2px);
+}
+
+/* Scroll Down Button */
+.hero-icon-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-icon-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+
+    /* Reset Section Styles for Mobile */
+    #home {
+        min-height: auto !important;
+        /* Let parent control height */
+        padding-top: 0 !important;
+        justify-content: flex-end !important;
+    }
+
+    .name-badge {
+        margin-left: 0;
+        /* Reset overlap */
+        border-radius: 0;
+        padding: 0;
+        /* No padding */
+        background: transparent !important;
+        /* No background */
+        width: fit-content;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        /* Slightly smaller */
+    }
+
+    /* Layout adjustments */
+    .scroll-arrow-container,
+    .hero-icon-btn {
+        display: none;
+    }
+
+    .hero-btn {
+        display: none !important;
+    }
+}

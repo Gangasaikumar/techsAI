@@ -1,0 +1,61 @@
+/* Social Right Styles */
+
+.social-right-container {
+    position: fixed;
+    top: 0;
+    right: 2rem;
+    /* Gap from right side */
+    width: 80px;
+    height: 100vh;
+    background: var(--bg-primary);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.social-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    /* Framer Motion Layout Animation needs this */
+    /* will-change: transform; */
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+    background: transparent;
+    cursor: pointer;
+}
+
+.social-btn:not(.arrow-btn):hover {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    transform: scale(1);
+    /* Smooth subtle scale instead of jumpy translate */
+}
+
+.arrow-btn:hover {
+    color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    transform: translateY(-1px);
+}
+
+/* Responsive: Hide on Mobile */
+@media (max-width: 900px) {
+    .social-right-container {
+        display: none !important;
+    }
+}
