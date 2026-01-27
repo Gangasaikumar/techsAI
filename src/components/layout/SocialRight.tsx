@@ -43,7 +43,7 @@ const SocialRight = () => {
     { icon: <XIcon size={20} />, href: "https://x.com/Gangasai_kumar" },
     {
       icon: <Instagram size={20} />,
-      href: "hhttps://www.instagram.com/gangasai_kumar/",
+      href: "https://www.instagram.com/gangasai_kumar/",
     },
   ];
 
