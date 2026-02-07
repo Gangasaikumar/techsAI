@@ -13,7 +13,11 @@ app.use(helmet());
 app.set("etag", false);
 
 // CORS setup for cookies
-const allowedOrigins = ["http://techsai.in"];
+const allowedOrigins = [
+  "http://techsai.in",
+  "https://www.techsai.in",
+  "https://techsai.onrender.com",
+];
 const methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"];
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
