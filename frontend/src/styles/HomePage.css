@@ -298,6 +298,116 @@
     animation: scribble 0.8s ease-out forwards 0.3s;
 }
 
+/* Wishlist Section */
+.wishlist-container {
+    margin-top: 2.5rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+.wishlist-form {
+    display: flex;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.wishlist-form:focus-within {
+    border-color: rgba(255, 193, 7, 0.5);
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.1);
+}
+
+.wishlist-form.error {
+    border-color: #ff4d4f;
+    box-shadow: 0 0 15px rgba(255, 77, 79, 0.2);
+}
+
+.wishlist-form-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.wishlist-error-msg {
+    color: #ff4d4f;
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+    text-align: left;
+    padding-left: 1.5rem;
+    font-weight: 500;
+}
+
+.wishlist-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+}
+
+.wishlist-input::placeholder {
+    color: #666;
+}
+
+.wishlist-submit {
+    background: #FFC107;
+    color: #1F2022;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.wishlist-submit:hover {
+    background: #ffca28;
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.wishlist-success {
+    color: #FFC107;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 1rem;
+}
+
+@media (max-width: 600px) {
+    .wishlist-container {
+        max-width: 90%;
+    }
+
+    .wishlist-form {
+        flex-direction: column;
+        background: transparent;
+        padding: 0;
+        border: none;
+        backdrop-filter: none;
+    }
+
+    .wishlist-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        margin-bottom: 0.8rem;
+        padding: 1rem;
+    }
+
+    .wishlist-submit {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 12px;
+    }
+}
+
 @keyframes scribble {
     to {
         stroke-dashoffset: 0;

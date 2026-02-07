@@ -118,6 +118,35 @@ const AnimatedUnit = ({ value, label }: { value: number; label: string }) => {
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      );
+  };
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    if (!email) {
+      setError("Email is required");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    setSubmitted(true);
+    // Here you would typically send the email to your backend
+  };
 
   // Target Date: June 4, 2026
   const targetDate = new Date("2026-06-04T00:00:00").getTime();
@@ -232,6 +261,54 @@ const HomePage = () => {
         </div>
 
         <p className="launch-date">Launching on June 4, 2026</p>
+
+        <motion.div
+          className="wishlist-container"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          {!submitted ? (
+            <div className="wishlist-form-wrapper">
+              <form
+                onSubmit={handleSubscribe}
+                className={`wishlist-form ${error ? "error" : ""}`}
+                noValidate
+              >
+                <input
+                  type="email"
+                  placeholder="Enter your email to get updates"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError("");
+                  }}
+                  className="wishlist-input"
+                />
+                <button type="submit" className="wishlist-submit">
+                  Join Wish List
+                </button>
+              </form>
+              {error && (
+                <motion.p
+                  className="wishlist-error-msg"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  {error}
+                </motion.p>
+              )}
+            </div>
+          ) : (
+            <motion.p
+              className="wishlist-success"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+            >
+              🎉 Success! You're on the list.
+            </motion.p>
+          )}
+        </motion.div>
 
         <button onClick={() => navigate("/gangsaikumar")} className="enter-btn">
           Visit Profile

@@ -21,21 +21,21 @@
 /* Grid Layout */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 4rem;
+    align-items: stretch;
 }
 
 @media (max-width: 768px) {
     .contact-grid {
-        gap: 0;
+        gap: 2rem;
     }
 }
 
 /* Contact Input Component */
 .input-group {
     position: relative;
-    margin-bottom: 1rem;
-    /* Further reduced margin */
+    margin-bottom: 0;
 }
 
 .input-label {
@@ -56,6 +56,10 @@
     color: var(--accent);
 }
 
+.input-label.error-label {
+    color: #ff4d4f;
+}
+
 .required-star {
     color: var(--accent);
 }
@@ -70,7 +74,21 @@
     color: #fff;
     font-size: 1rem;
     outline: none;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.contact-input.error-border,
+.contact-textarea.error-border {
+    border-color: #ff4d4f;
+}
+
+.error-message {
+    display: block;
+    color: #ff4d4f;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    padding-left: 2rem;
+    font-weight: 500;
 }
 
 .contact-textarea {
@@ -87,10 +105,164 @@
     border-color: var(--accent);
 }
 
+/* Left Column Flex */
+.contact-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* File Upload Section */
+.file-upload-section {
+    margin: 0;
+}
+
+.file-upload-btn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.5rem 2rem;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file-upload-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.file-preview-container {
+    background: rgba(255, 255, 255, 0.03);
+    /* Default subtle tint */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.file-preview-container.is-pdf {
+    background: rgba(255, 193, 7, 0.03);
+    border-color: rgba(255, 193, 7, 0.2);
+}
+
+.file-preview-container.is-image {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.file-preview-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.image-preview-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    cursor: pointer;
+}
+
+.image-preview-wrapper span {
+    color: #fff;
+    font-size: 0.95rem;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.image-preview {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.file-icon-preview {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--accent);
+    flex: 1;
+}
+
+.file-icon-preview span {
+    color: #fff;
+    font-size: 0.95rem;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.remove-file-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.remove-file-btn:hover {
+    background: #ff4d4f;
+    color: #fff;
+    border-color: #ff4d4f;
+}
+
+/* Submit Button Area */
+/* Right Column Flex */
+.contact-message-area {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+}
+
+.contact-message-area .input-group {
+    flex: 1;
+}
+
+.contact-message-area .contact-textarea {
+    height: 100% !important;
+    min-height: unset;
+}
+
+/* Submit Button Area */
+.submit-btn-wrapper {
+    text-align: right;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 /* Submit Button */
 .contact-btn {
     margin-top: 0;
-    /* Fully removed margin */
     padding: 1rem 2.5rem;
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.05);
@@ -100,12 +272,121 @@
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s;
+    gap: 0.8rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.contact-btn:hover {
+.contact-btn:hover:not(:disabled) {
     background: var(--accent);
     color: #000;
     border-color: var(--accent);
+}
+
+.contact-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    cursor: default;
+}
+
+.contact-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+}
+
+.modal-container {
+    background: #1F2022;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 900px;
+    height: 85vh;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    background: #ff4d4f;
+    transform: rotate(90deg);
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+    padding: 4rem 2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-preview-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Utility */
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    opacity: 0.8;
 }
