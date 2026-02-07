@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/App.css";
 import "../styles/HomePage.css";
+import { useWishlist } from "../hooks/useWishlist";
 
 const FlipCard = ({ digit }: { digit: string }) => {
   const [prevDigit, setPrevDigit] = useState(digit);
@@ -118,86 +119,16 @@ const AnimatedUnit = ({ value, label }: { value: number; label: string }) => {
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
-
-  const validateEmail = (email: string) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      );
-  };
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
-    if (!email) {
-      setError("Email is required");
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
-      return;
-    }
-
-    setSubmitted(true);
-    // Here you would typically send the email to your backend
-  };
-
-  // Target Date: June 4, 2026
-  const targetDate = new Date("2026-06-04T00:00:00").getTime();
-
-  const [timeLeft, setTimeLeft] = useState({
-    months: 0,
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const target = new Date("2026-06-04T00:00:00");
-      const difference = target.getTime() - now.getTime();
-
-      if (difference > 0) {
-        // Calculate months accurately
-        let months =
-          (target.getFullYear() - now.getFullYear()) * 12 +
-          (target.getMonth() - now.getMonth());
-
-        // Adjust if current day is beyond target day
-        if (target.getDate() < now.getDate()) {
-          months--;
-        }
-
-        // Calculate remaining time after months
-        const tempDate = new Date(now);
-        tempDate.setMonth(now.getMonth() + months);
-        const remainingDiff = target.getTime() - tempDate.getTime();
-
-        setTimeLeft({
-          months: Math.max(0, months),
-          days: Math.floor(remainingDiff / (1000 * 60 * 60 * 24)),
-          hours: Math.floor(
-            (remainingDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-          ),
-          minutes: Math.floor((remainingDiff % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((remainingDiff % (1000 * 60)) / 1000),
-        });
-      }
-    };
-
-    updateTime(); // Initial call
-    const interval = setInterval(updateTime, 1000);
-
-    return () => clearInterval(interval);
-  }, [targetDate]);
+  const {
+    email,
+    setEmail,
+    submitted,
+    error,
+    setError,
+    isLoading,
+    timeLeft,
+    handleSubscribe,
+  } = useWishlist("2026-06-04T00:00:00");
 
   return (
     <div className="home-container">
@@ -285,8 +216,12 @@ const HomePage = () => {
                   }}
                   className="wishlist-input"
                 />
-                <button type="submit" className="wishlist-submit">
-                  Join Wish List
+                <button
+                  type="submit"
+                  className="wishlist-submit"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Joining..." : "Join Wish List"}
                 </button>
               </form>
               {error && (

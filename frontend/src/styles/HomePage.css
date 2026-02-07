@@ -367,10 +367,19 @@
     white-space: nowrap;
 }
 
-.wishlist-submit:hover {
+.wishlist-submit:hover:not(:disabled) {
     background: #ffca28;
     transform: scale(1.02);
     box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.wishlist-submit:disabled {
+    background: #FFC107;
+    opacity: 0.6;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+    pointer-events: none;
 }
 
 .wishlist-success {

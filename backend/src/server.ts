@@ -2,6 +2,7 @@ import express from "express";
 import cors, { type CorsOptions } from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
+import routes from "./routes/routes.ts";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,6 +42,9 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Routes
+app.use("/", routes);
 
 // Health check
 app.get("/health", (_req, res) => {
