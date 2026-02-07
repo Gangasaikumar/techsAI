@@ -20,17 +20,22 @@ export class WishlistService {
     // ✅ Logic: Countdown Calculation (June 4, 2026)
     const countdown = this._calculateCountdown(new Date("2026-06-04T00:00:00"));
 
-    // ✅ Logic: Notifications
-    sendMail({
-      to: process.env.SMTP_USER!,
-      subject: "New Wishlist Subscriber",
-      html: notifyAdminTemplate(email),
-    });
-
-    sendMail({
-      to: email,
-      subject: "Congratulations! You're on the TechsAI wishlist 🎉",
-      html: userConfirmationTemplate(email, countdown),
+    // Send emails AFTER response
+    setImmediate(async () => {
+      try {
+        await sendMail({
+          to: process.env.SMTP_USER!,
+          subject: "New Wishlist Subscriber",
+          html: notifyAdminTemplate(email),
+        });
+        await sendMail({
+          to: email,
+          subject: "Congratulations! You're on the TechsAI wishlist 🎉",
+          html: userConfirmationTemplate(email, countdown),
+        });
+      } catch (e) {
+        console.error("Email failed", e);
+      }
     });
 
     // ✅ Logic: Persistence

@@ -26,17 +26,23 @@ export class ContactService {
       fileUrl = `data:${file.mimetype};base64,${base64Data}`;
     }
 
-    // ✅ Logic: Notify Admin
-    sendMail({
-      to: process.env.SMTP_USER!,
-      subject: `New Contact Request from ${fullName}`,
-      html: contactAdminTemplate(
-        fullName,
-        email,
-        mobile || "",
-        message,
-        !!file,
-      ),
+    // Send emails AFTER response
+    setImmediate(async () => {
+      try {
+        await sendMail({
+          to: process.env.SMTP_USER!,
+          subject: `New Contact Request from ${fullName}`,
+          html: contactAdminTemplate(
+            fullName,
+            email,
+            mobile || "",
+            message,
+            !!file,
+          ),
+        });
+      } catch (e) {
+        console.error("Email failed", e);
+      }
     });
 
     // ✅ Logic: Save to Database
