@@ -27,22 +27,16 @@ export class ContactService {
     }
 
     // Send emails AFTER response
-    setImmediate(async () => {
-      try {
-        await sendMail({
-          to: process.env.SMTP_USER!,
-          subject: `New Contact Request from ${fullName}`,
-          html: contactAdminTemplate(
-            fullName,
-            email,
-            mobile || "",
-            message,
-            !!file,
-          ),
-        });
-      } catch (e) {
-        console.error("Email failed", e);
-      }
+    await sendMail({
+      to: process.env.SMTP_USER!,
+      subject: `New Contact Request from ${fullName}`,
+      html: contactAdminTemplate(
+        fullName,
+        email,
+        mobile || "",
+        message,
+        !!file,
+      ),
     });
 
     // ✅ Logic: Save to Database
