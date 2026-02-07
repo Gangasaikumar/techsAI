@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 const wishListSchema = new mongoose.Schema(
   {
     email: { type: String, required: true },
-    conformResponse: { type: String, required: true },
-    notifyResponse: { type: String, required: true },
   },
   { timestamps: true, versionKey: false },
 );

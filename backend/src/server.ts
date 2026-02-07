@@ -3,6 +3,7 @@ import cors, { type CorsOptions } from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import routes from "./routes/routes.ts";
+import mongoose from "mongoose";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -15,19 +16,16 @@ app.use(helmet());
 app.set("etag", false);
 
 // CORS setup for cookies
-const allowedOrigins = [
+const allowedOrigins = new Set<string>([
   "https://techsai.in",
   "https://www.techsai.in",
-  "https://techsai.onrender.com",
-];
+  "http://localhost:5173",
+]);
 const methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"];
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`Not allowed by CORS: ${origin}`));
-    }
+    if (typeof origin === "undefined") return callback(null, true);
+    if (allowedOrigins.has(origin)) return callback(null, true);
   },
   methods: methods,
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -50,6 +48,11 @@ app.use("/", routes);
 // Health check
 app.get("/health", (_req, res) => {
   res.send("<h1>Server is running!</h1>");
+});
+
+app.get("/db-health", async (_req, res) => {
+  const state = mongoose.connection.readyState;
+  res.json({ mongoState: state });
 });
 
 // Start server

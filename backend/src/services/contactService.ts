@@ -27,7 +27,7 @@ export class ContactService {
     }
 
     // ✅ Logic: Notify Admin
-    const notifyMail = await sendMail({
+    sendMail({
       to: process.env.SMTP_USER!,
       subject: `New Contact Request from ${fullName}`,
       html: contactAdminTemplate(
@@ -50,7 +50,6 @@ export class ContactService {
       message,
       filename: file?.originalname,
       fileUrl,
-      notifyResponse: notifyMail.response,
     });
 
     const savedEntry = await newContactEntry.save();
