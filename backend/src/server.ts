@@ -16,7 +16,7 @@ app.set("etag", false);
 
 // CORS setup for cookies
 const allowedOrigins = [
-  "http://techsai.in",
+  "https://techsai.in",
   "https://www.techsai.in",
   "https://techsai.onrender.com",
 ];
