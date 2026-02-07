@@ -1,5 +1,6 @@
 {
   "name": "techsai",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
@@ -10,5 +11,22 @@
     "start": "node --env-file=config/env/.env --watch src/server.ts",
     "dev": "node --env-file=config/env/.env.dev --watch src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "25"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/helmet": "^0.0.48",
+    "@types/node": "^25.2.1",
+    "typescript": "^5.9.3"
   }
 }

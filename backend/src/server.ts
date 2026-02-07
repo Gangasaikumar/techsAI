@@ -1,0 +1,49 @@
+import express from "express";
+import cors, { type CorsOptions } from "cors";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Security headers
+app.use(helmet());
+
+// Disable etag caching
+app.set("etag", false);
+
+// CORS setup for cookies
+const allowedOrigins = ["http://techsai.in"];
+const methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"];
+const corsOptions: CorsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Not allowed by CORS: ${origin}`));
+    }
+  },
+  methods: methods,
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // allow cookies
+};
+
+// Apply middlewares
+app.use(cors(corsOptions));
+app.use(
+  express.json({
+    limit: "50mb",
+  }),
+);
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Health check
+app.get("/health", (_req, res) => {
+  res.send("<h1>Server is running!</h1>");
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
