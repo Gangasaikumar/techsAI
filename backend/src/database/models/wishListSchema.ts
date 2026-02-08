@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const wishListSchema = new mongoose.Schema(
   {
     email: { type: String, required: true },
+    status: { type: String, enum: ["pending", "replied"], default: "pending" },
   },
   { timestamps: true, versionKey: false },
 );

@@ -8,6 +8,7 @@ const contactSchema = new mongoose.Schema(
     message: { type: String, required: true },
     filename: { type: String, required: false }, // Store filename if a file was uploaded
     fileUrl: { type: String, required: false }, // Optional: Store a URL if hosted
+    status: { type: String, enum: ["pending", "replied"], default: "pending" },
   },
   { timestamps: true, versionKey: false },
 );
