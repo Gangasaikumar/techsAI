@@ -5,6 +5,7 @@ import {
   userConfirmationTemplate,
 } from "../utils/emailTemplates.ts";
 import { sendMail } from "../utils/helper.ts";
+import { withTimeout } from "../utils/withTimeout.ts";
 
 export class WishlistService {
   static async addToWishlist(email: string) {
@@ -21,16 +22,24 @@ export class WishlistService {
     const countdown = this._calculateCountdown(new Date("2026-06-04T00:00:00"));
 
     // Send emails AFTER response
-    await sendMail({
-      to: process.env.SMTP_USER!,
-      subject: "New Wishlist Subscriber",
-      html: notifyAdminTemplate(email),
-    });
-    await sendMail({
-      to: email,
-      subject: "Congratulations! You're on the TechsAI wishlist 🎉",
-      html: userConfirmationTemplate(email, countdown),
-    });
+
+    await withTimeout(
+      sendMail({
+        to: process.env.SMTP_USER!,
+        subject: "New Wishlist Subscriber",
+        html: notifyAdminTemplate(email),
+      }),
+      7000,
+    );
+
+    await withTimeout(
+      sendMail({
+        to: email,
+        subject: "Congratulations! You're on the TechsAI wishlist 🎉",
+        html: userConfirmationTemplate(email, countdown),
+      }),
+      7000,
+    );
 
     // ✅ Logic: Persistence
     const newWishlistEntry = new Wishlist({
