@@ -1,10 +1,10 @@
 import { getDb } from "../database/mongodb.ts";
 import { wishListSchema } from "../database/models/wishListSchema.ts";
-import {
-  notifyAdminTemplate,
-  userConfirmationTemplate,
-} from "../utils/emailTemplates.ts";
-import { sendMail } from "../utils/helper.ts";
+// import {
+//   notifyAdminTemplate,
+//   userConfirmationTemplate,
+// } from "../utils/emailTemplates.ts";
+// import { sendMail } from "../utils/helper.ts";
 
 export class WishlistService {
   static async addToWishlist(email: string) {
@@ -21,17 +21,17 @@ export class WishlistService {
     const countdown = this._calculateCountdown(new Date("2026-06-04T00:00:00"));
 
     // Send emails AFTER response
-    sendMail({
-      to: process.env.SMTP_USER!,
-      subject: "New Wishlist Subscriber",
-      html: notifyAdminTemplate(email),
-    });
+    // sendMail({
+    //   to: process.env.SMTP_USER!,
+    //   subject: "New Wishlist Subscriber",
+    //   html: notifyAdminTemplate(email),
+    // });
 
-    sendMail({
-      to: email,
-      subject: "Congratulations! You're on the TechsAI wishlist 🎉",
-      html: userConfirmationTemplate(email, countdown),
-    });
+    // sendMail({
+    //   to: email,
+    //   subject: "Congratulations! You're on the TechsAI wishlist 🎉",
+    //   html: userConfirmationTemplate(email, countdown),
+    // });
 
     // ✅ Logic: Persistence
     const newWishlistEntry = new Wishlist({

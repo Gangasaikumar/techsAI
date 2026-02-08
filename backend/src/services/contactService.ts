@@ -1,7 +1,7 @@
 import { getDb } from "../database/mongodb.ts";
 import { contactSchema } from "../database/models/contactSchema.ts";
-import { contactAdminTemplate } from "../utils/emailTemplates.ts";
-import { sendMail } from "../utils/helper.ts";
+// import { contactAdminTemplate } from "../utils/emailTemplates.ts";
+// import { sendMail } from "../utils/helper.ts";
 
 export interface ContactData {
   fullName: string;
@@ -26,18 +26,18 @@ export class ContactService {
       fileUrl = `data:${file.mimetype};base64,${base64Data}`;
     }
 
-    // Send emails AFTER response
-    sendMail({
-      to: process.env.SMTP_USER!,
-      subject: `New Contact Request from ${fullName}`,
-      html: contactAdminTemplate(
-        fullName,
-        email,
-        mobile || "",
-        message,
-        !!file,
-      ),
-    });
+    // // Send emails AFTER response
+    // sendMail({
+    //   to: process.env.SMTP_USER!,
+    //   subject: `New Contact Request from ${fullName}`,
+    //   html: contactAdminTemplate(
+    //     fullName,
+    //     email,
+    //     mobile || "",
+    //     message,
+    //     !!file,
+    //   ),
+    // });
 
     // ✅ Logic: Save to Database
     const db = await getDb("techsai");
