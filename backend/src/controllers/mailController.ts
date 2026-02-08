@@ -30,7 +30,7 @@ export const contactController = async (req: Request, res: Response) => {
       });
     }
 
-    const savedEntry = await ContactService.processContactForm({
+    const { code, ...response } = await ContactService.processContactForm({
       ...parsed.data,
       file: req.file
         ? {
@@ -41,17 +41,12 @@ export const contactController = async (req: Request, res: Response) => {
         : undefined,
     });
 
-    return res.status(201).json({
-      success: true,
-      message: "Contact message sent successfully.",
-      data: savedEntry,
-    });
+    return res.status(response.success ? 201 : code || 500).json(response);
   } catch (error: unknown) {
-    console.error("Contact error:", error);
+    console.error("Contact controller error:", error);
     return res.status(500).json({
       success: false,
-      message:
-        error instanceof Error ? error.message : "An unexpected error occurred",
+      message: "An unexpected error occurred",
     });
   }
 };
@@ -70,21 +65,14 @@ export const wishlistController = async (req: Request, res: Response) => {
     }
 
     const { email } = parsed.data;
-    const savedEntry = await WishlistService.addToWishlist(email);
+    const { code, ...response } = await WishlistService.addToWishlist(email);
 
-    return res.status(201).json({
-      success: true,
-      message: "Email added to wishlist successfully.",
-      data: savedEntry,
-    });
+    return res.status(response.success ? 201 : code || 500).json(response);
   } catch (error: unknown) {
-    console.error("Wishlist error:", error);
-    const status =
-      (error as Error).message === "Email already in wishlist." ? 409 : 500;
-    return res.status(status).json({
+    console.error("Wishlist controller error:", error);
+    return res.status(500).json({
       success: false,
-      message:
-        error instanceof Error ? error.message : "An unexpected error occurred",
+      message: "An unexpected error occurred",
     });
   }
 };
