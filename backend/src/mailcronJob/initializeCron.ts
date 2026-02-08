@@ -16,6 +16,7 @@ const processCron = async () => {
   console.log(
     `🚀 Starting Email Cron Job${typeArg ? ` (Type: ${typeArg})` : ""}...`,
   );
+  console.log("🕒 Wishlist cron auto-run at:", new Date().toISOString());
   const db = await getDb("techsai");
 
   try {
