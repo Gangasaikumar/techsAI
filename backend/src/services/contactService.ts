@@ -1,55 +1,61 @@
 import { getDb } from "../database/mongodb.ts";
 import { contactSchema } from "../database/models/contactSchema.ts";
-import { emailQueue } from "../queue/emailQueue.ts";
-import type { EmailJob } from "../queue/emailJob.ts";
+import { contactAdminTemplate } from "../utils/emailTemplates.ts";
+import { sendMail } from "../utils/helper.ts";
+
+export interface ContactData {
+  fullName: string;
+  email: string;
+  mobile?: string;
+  message: string;
+  file?: {
+    buffer: Buffer;
+    mimetype: string;
+    originalname: string;
+  };
+}
 
 export class ContactService {
-  static async processContactForm(data: {
-    fullName: string;
-    email: string;
-    mobile?: string;
-    message: string;
-    file?: {
-      buffer: Buffer;
-      mimetype: string;
-      originalname: string;
-    };
-  }) {
+  static async processContactForm(data: ContactData) {
     const { fullName, email, mobile, message, file } = data;
 
-    // Save file (optional)
+    // ✅ Logic: Convert file to Base64
     let fileUrl = "";
     if (file) {
-      const base64 = file.buffer.toString("base64");
-      fileUrl = `data:${file.mimetype};base64,${base64}`;
+      const base64Data = file.buffer.toString("base64");
+      fileUrl = `data:${file.mimetype};base64,${base64Data}`;
     }
 
-    // Save DB FIRST
+    // Send emails AFTER response
+    await sendMail({
+      to: process.env.SMTP_USER!,
+      subject: `New Contact Request from ${fullName}`,
+      html: contactAdminTemplate(
+        fullName,
+        email,
+        mobile || "",
+        message,
+        !!file,
+      ),
+    });
+
+    // ✅ Logic: Save to Database
     const db = await getDb("techsai");
     const Contact = db.models.contact || db.model("contact", contactSchema);
 
-    const savedEntry = await new Contact({
+    const newContactEntry = new Contact({
       fullName,
       email,
       mobile,
       message,
       filename: file?.originalname,
       fileUrl,
-    }).save();
+    });
 
-    // Enqueue email job (🔥 key change)
-    const job: EmailJob = {
-      type: "CONTACT",
-      payload: {
-        fullName,
-        email,
-        mobile,
-        message,
-        hasAttachment: !!file,
-      },
-    };
-
-    await emailQueue.add("email-job", job);
+    const savedEntry = await newContactEntry.save();
+    if (!savedEntry?._id) {
+      throw new Error("Failed to save contact message to database.");
+    }
 
     return savedEntry;
   }

@@ -7,14 +7,12 @@ import {
 import { ContactService } from "../services/contactService.ts";
 import { WishlistService } from "../services/wishlistService.ts";
 
-/* -------------------------- MULTER SETUP -------------------------- */
-
-// Memory storage (file handled in service layer)
+// ✅ Multer configuration for memory storage (Base64)
 const storage = multer.memoryStorage();
 
 const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
 });
 
 export const contactUpload = upload.single("file");
@@ -22,22 +20,17 @@ export const contactUpload = upload.single("file");
 /* -------------------------- CONTACT CONTROLLER -------------------------- */
 export const contactController = async (req: Request, res: Response) => {
   try {
-    // ✅ Validate request body
     const parsed = contactFormSchema.safeParse(req.body);
 
     if (!parsed.success) {
-      const invalidFields = parsed.error.issues.map((issue) =>
-        issue.path.join("."),
-      );
-
+      const invalid = parsed.error.issues.map((issue) => issue.path.join("."));
       return res.status(400).json({
         success: false,
-        message: `Invalid input: ${invalidFields.join(", ")}`,
+        message: `Invalid input: missing or invalid fields ${invalid.join(", ")}`,
       });
     }
 
-    // ✅ Call service (DB save + BullMQ enqueue)
-    await ContactService.processContactForm({
+    const savedEntry = await ContactService.processContactForm({
       ...parsed.data,
       file: req.file
         ? {
@@ -48,14 +41,13 @@ export const contactController = async (req: Request, res: Response) => {
         : undefined,
     });
 
-    // ✅ Respond immediately (email happens in worker)
     return res.status(201).json({
       success: true,
-      message: "Contact message received successfully.",
+      message: "Contact message sent successfully.",
+      data: savedEntry,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Contact error:", error);
-
     return res.status(500).json({
       success: false,
       message:
@@ -67,39 +59,29 @@ export const contactController = async (req: Request, res: Response) => {
 /* -------------------------- WISHLIST CONTROLLER -------------------------- */
 export const wishlistController = async (req: Request, res: Response) => {
   try {
-    // ✅ Validate request body
     const parsed = wishListEmailSchema.safeParse(req.body);
 
     if (!parsed.success) {
-      const invalidFields = parsed.error.issues.map((issue) =>
-        issue.path.join("."),
-      );
-
+      const invalid = parsed.error.issues.map((issue) => issue.path.join("."));
       return res.status(400).json({
         success: false,
-        message: `Invalid input: ${invalidFields.join(", ")}`,
+        message: `Invalid input: missing or invalid fields ${invalid.join(", ")}`,
       });
     }
 
     const { email } = parsed.data;
+    const savedEntry = await WishlistService.addToWishlist(email);
 
-    // ✅ Call service (DB save + BullMQ enqueue)
-    await WishlistService.addToWishlist(email);
-
-    // ✅ Respond immediately
     return res.status(201).json({
       success: true,
       message: "Email added to wishlist successfully.",
+      data: savedEntry,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Wishlist error:", error);
-
-    const statusCode =
-      error instanceof Error && error.message === "Email already in wishlist."
-        ? 409
-        : 500;
-
-    return res.status(statusCode).json({
+    const status =
+      (error as Error).message === "Email already in wishlist." ? 409 : 500;
+    return res.status(status).json({
       success: false,
       message:
         error instanceof Error ? error.message : "An unexpected error occurred",

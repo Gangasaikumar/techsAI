@@ -9,7 +9,6 @@
   "main": "server.ts",
   "scripts": {
     "start": "node --env-file=config/env/.env --watch src/server.ts",
-    "worker": "node --env-file=config/env/.env --watch src/queue/emailWorker.ts",
     "dev": "node --env-file=config/env/.env.dev --watch src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,12 +17,10 @@
   },
   "dependencies": {
     "body-parser": "^2.2.2",
-    "bullmq": "^5.67.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "helmet": "^8.1.0",
-    "ioredis": "^5.9.2",
     "mongoose": "^9.1.6",
     "multer": "^2.0.2",
     "nodemailer": "^8.0.1",
